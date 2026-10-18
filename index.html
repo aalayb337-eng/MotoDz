@@ -1,114 +1,648 @@
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoDz | قطع غيار الدراجات النارية - فيض البطمة</title>
-    <style>
-        body { font-family: Tahoma, sans-serif; background-color: #f4f6f8; margin: 0; padding: 0; color: #333; }
-        header { background-color: #111; color: #fff; padding: 15px; text-align: center; }
-        .container { padding: 15px; max-width: 600px; margin: auto; }
-        .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px; }
-        .product-grid { display: grid; gap: 15px; margin-bottom: 15px; }
-        .product-card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid #ddd; display: flex; flex-direction: column; justify-content: space-between; }
-        .product-title { font-size: 16px; font-weight: bold; margin-bottom: 5px; }
-        .product-price { color: #0d6efd; font-weight: bold; margin-bottom: 10px; }
-        .btn { background-color: #198754; color: white; padding: 10px; border: none; width: 100%; border-radius: 5px; font-size: 15px; cursor: pointer; font-weight: bold; }
-        .btn-cart { background-color: #0d6efd; }
-        .btn-whatsapp { background-color: #25d366; margin-top: 10px; display: none; }
-        .location { color: #d9534f; font-weight: bold; font-size: 14px; }
-        #cart-summary { background: #eef9ff; border: 1px solid #bce8f1; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; }
-    </style>
-</head>
-<body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101820">
+<meta name="description" content="MotoDz لبيع قطع غيار الدراجات النارية في فيض البطمة، الجلفة.">
+<title>MotoDz | متجر قطع غيار الدراجات النارية</title>
 
+<style>
+:root {
+  --dark:#101820;
+  --orange:#ff8a00;
+  --green:#20b968;
+  --bg:#f3f5f7;
+  --border:#e2e7ec;
+  --muted:#687584;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:var(--bg);
+  color:#202833;
+  line-height:1.7;
+}
+button,input,select { font:inherit; }
+button { cursor:pointer; }
+header {
+  background:var(--dark);
+  color:white;
+  padding:15px;
+  border-bottom:3px solid var(--orange);
+}
+.header-inner {
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.logo { font-size:28px;font-weight:bold; }
+.logo span { color:var(--orange); }
+.header-sub { font-size:12px;color:#d9e0e7; }
+.top-cart {
+  border:0;
+  border-radius:9px;
+  background:var(--orange);
+  padding:9px 13px;
+  font-weight:bold;
+}
+main { max-width:1100px;margin:auto;padding:16px 12px 35px; }
+.hero {
+  background:linear-gradient(135deg,#101820,#304354);
+  color:white;
+  border-radius:15px;
+  padding:25px 18px;
+  margin-bottom:16px;
+}
+.hero h1 { margin:0 0 8px;font-size:clamp(24px,5vw,36px); }
+.hero h1 span { color:var(--orange); }
+.hero p { color:#e1e8ee;margin:5px 0 12px; }
+.location { color:#ffd39a;font-size:14px; }
+.notice {
+  padding:12px;
+  background:#fff8e8;
+  border:1px solid #f0d6a3;
+  border-radius:9px;
+  font-size:13px;
+  margin-bottom:18px;
+}
+h2.section-title { font-size:21px;margin:20px 0 12px; }
+.tools { display:grid;gap:9px;margin-bottom:13px; }
+.tools input,.tools select {
+  width:100%;
+  min-width:0;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:white;
+}
+.categories { display:flex;flex-wrap:wrap;gap:7px;margin-bottom:15px; }
+.category-btn {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:7px 12px;
+  font-size:13px;
+}
+.category-btn.active { background:var(--dark);color:white; }
+.products {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:11px;
+}
+.product {
+  min-width:0;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.product-image-wrap {
+  width:100%;
+  height:145px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.product-image {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.product-placeholder {
+  font-size:48px;
+  background:#edf1f4;
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
+}
+.product-content {
+  padding:11px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.product-category { font-size:11px;color:var(--muted); }
+.product h3 { font-size:14px;line-height:1.6;margin:4px 0; }
+.product-description { font-size:12px;color:var(--muted);margin:4px 0 9px; }
+.price { font-weight:bold;color:#087b49;margin:3px 0 10px;font-size:14px; }
+.btn {
+  width:100%;
+  border:0;
+  border-radius:8px;
+  padding:10px;
+  font-weight:bold;
+}
+.add-btn { background:var(--dark);color:white;margin-top:auto; }
+.cart-panel {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:14px;
+  margin-top:25px;
+  scroll-margin-top:10px;
+}
+.cart-head { display:flex;justify-content:space-between;align-items:center;gap:8px; }
+.cart-head h2 { font-size:20px;margin:0; }
+.text-btn { border:0;background:none;color:#c0392b;font-size:12px; }
+.empty { text-align:center;color:var(--muted);padding:15px 0; }
+.cart-item {
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  border-bottom:1px solid var(--border);
+  padding:12px 0;
+}
+.cart-name { font-size:14px;font-weight:bold; }
+.cart-unit { font-size:12px;color:var(--muted); }
+.quantity { display:flex;align-items:center;gap:8px;margin-top:6px; }
+.quantity button {
+  width:30px;height:30px;border:1px solid var(--border);
+  border-radius:7px;background:#f5f6f7;font-weight:bold;
+}
+.cart-total {
+  display:flex;justify-content:space-between;gap:10px;
+  padding:14px 0;font-weight:bold;font-size:17px;
+}
+.cart-actions { display:grid;gap:9px; }
+.whatsapp-btn { background:var(--green);color:white; }
+.secondary-btn { background:#e9edf1;color:#263442; }
+button:disabled { opacity:.5;cursor:not-allowed; }
+.small-note { color:var(--muted);font-size:12px; }
+footer {
+  background:var(--dark);color:#dce3e9;text-align:center;
+  padding:22px 12px;font-size:13px;
+}
+footer strong { color:var(--orange); }
+.whatsapp-float {
+  position:fixed;bottom:14px;left:14px;z-index:5;
+  background:var(--green);color:white;text-decoration:none;
+  padding:10px 15px;border-radius:25px;font-weight:bold;
+  box-shadow:0 4px 15px #0003;
+}
+.toast {
+  display:none;position:fixed;bottom:65px;right:50%;
+  transform:translateX(50%);z-index:10;
+  background:var(--dark);color:white;padding:10px 14px;
+  border-radius:9px;max-width:90%;text-align:center;font-size:13px;
+}
+@media(min-width:600px) {
+  .tools { grid-template-columns:2fr 1fr; }
+  .products { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .product-image-wrap { height:175px; }
+  .product-content { padding:14px; }
+  .product h3 { font-size:16px; }
+  .cart-actions { grid-template-columns:2fr 1fr; }
+}
+@media(min-width:900px) {
+  .products { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  main { padding-top:24px; }
+  .hero { padding:35px 28px; }
+}
+</style>
+</head>
+
+<body>
 <header>
-    <h2>MotoDz</h2>
-    <p>متجر قطع غيار الدراجات النارية - فيض البطمة، الجلفة</p>
+  <div class="header-inner">
+    <div>
+      <div class="logo">Moto<span>Dz</span> 🏍️</div>
+      <div class="header-sub">قطع غيار الدراجات النارية</div>
+    </div>
+    <button class="top-cart" onclick="goToCart()">
+      🛒 السلة (<span id="header-count">0</span>)
+    </button>
+  </div>
 </header>
 
-<div class="container">
-    <div class="card">
-        <h3>مرحباً بك في متجرنا 🏍️</h3>
-        <p>اختر قطع الغيار المطلوبة، أضفها للسلة، وأرسل طلبك مباشرة عبر الواتساب لتأكيد التوفر في المحل.</p>
-        <p class="location">📍 فيض البطمة - الجلفة، الجزائر</p>
+<main>
+  <section class="hero">
+    <h1>مرحبًا بك في <span>MotoDz</span></h1>
+    <p>ابحث عن قطع غيار دراجتك، أضفها إلى السلة وأرسل طلبك للمحل.</p>
+    <div class="location">📍 فيض البطمة – الجلفة – الجزائر</div>
+  </section>
+
+  <div class="notice">
+    ⚠️ الأسعار أدناه تجريبية وليست أسعارًا مؤكدة من المحل.
+    تأكد من السعر والتوفر ومناسبة القطعة لدراجتك قبل الشراء.
+  </div>
+
+  <h2 class="section-title">🔍 ابحث عن قطعة الغيار</h2>
+  <div class="tools">
+    <input id="search" type="search" placeholder="مثال: محرك، زيت، عجلة..."
+      aria-label="البحث عن المنتجات">
+    <select id="sort" aria-label="ترتيب المنتجات">
+      <option value="default">الترتيب الافتراضي</option>
+      <option value="low">السعر من الأقل للأعلى</option>
+      <option value="high">السعر من الأعلى للأقل</option>
+      <option value="name">الاسم أبجديًا</option>
+    </select>
+  </div>
+
+  <div class="categories" id="categories">
+    <button class="category-btn active" data-category="الكل">الكل</button>
+    <button class="category-btn" data-category="المحركات">المحركات</button>
+    <button class="category-btn" data-category="العجلات">العجلات</button>
+    <button class="category-btn" data-category="الزيوت">الزيوت</button>
+    <button class="category-btn" data-category="الكهرباء">الكهرباء</button>
+    <button class="category-btn" data-category="أخرى">أخرى</button>
+  </div>
+
+  <h2 class="section-title">🛍️ منتجات المتجر</h2>
+  <div id="products" class="products"></div>
+  <p id="no-results" class="empty" hidden>لا توجد منتجات مطابقة لبحثك.</p>
+
+  <section class="cart-panel" id="cart">
+    <div class="cart-head">
+      <h2>🛒 سلة المشتريات</h2>
+      <button class="text-btn" onclick="clearCart()">إفراغ السلة</button>
     </div>
-
-    <div id="cart-summary">
-        🛒 السلة: <span id="cart-count">0</span> قطع | المجموع الكلي: <span id="cart-total">0</span> دج
+    <div id="cart-items"></div>
+    <div class="cart-total">
+      <span>المجموع التقريبي</span>
+      <span id="cart-total">0 دج</span>
     </div>
-
-    <h3>قائمة المنتجات والقطع المتوفرة:</h3>
-    
-    <div class="product-grid">
-        <!-- المنتج الأول -->
-        <div class="product-card">
-            <div>
-                <div class="product-title">محرك C150 كامل</div>
-                <div class="product-price">28,000 دج</div>
-                <p style="font-size: 13px; color: #555;">متوفر في المحل - ضمان الجودة والتوافق.</p>
-            </div>
-            <button class="btn btn-cart" onclick="addToCart('محرك C150', 28000)">إضافة للسلة</button>
-        </div>
-
-        <!-- المنتج الثاني -->
-        <div class="product-card">
-            <div>
-                <div class="product-title">طقم إطارات (عجلات) أمامية وخلفية</div>
-                <div class="product-price">6,500 دج</div>
-                <p style="font-size: 13px; color: #555;">متين ومقاوم لجميع الطرق.</p>
-            </div>
-            <button class="btn btn-cart" onclick="addToCart('طقم إطارات دراجة', 6500)">إضافة للسلة</button>
-        </div>
-
-        <!-- المنتج الثالث -->
-        <div class="product-card">
-            <div>
-                <div class="product-title">زيت محرك عالي الأداء</div>
-                <div class="product-price">1,200 دج</div>
-                <p style="font-size: 13px; color: #555;">حماية قصوى وعمر أطول للمحرك.</p>
-            </div>
-            <button class="btn btn-cart" onclick="addToCart('زيت محرك عالي الأداء', 1200)">إضافة للسلة</button>
-        </div>
+    <div class="cart-actions">
+      <button id="order-btn" class="btn whatsapp-btn"
+        onclick="sendOrder()" disabled>📲 إرسال الطلب عبر واتساب</button>
+      <button class="btn secondary-btn" onclick="continueShopping()">
+        متابعة التسوق
+      </button>
     </div>
+    <p class="small-note">
+      سيفتح واتساب برسالة جاهزة. اضغط على «إرسال» داخل واتساب لإيصال طلبك.
+      لا يتضمن المتجر دفعًا إلكترونيًا.
+    </p>
+  </section>
+</main>
 
-    <div style="text-align: center; font-size: 13px; color: #666; margin-bottom: 15px;">
-        الأسعار والتوفر تؤكد مع المحل قبل الدفع النهائي.
-    </div>
+<footer>
+  <strong>MotoDz</strong> – متجر قطع غيار الدراجات النارية
+  <br>فيض البطمة، ولاية الجلفة، الجزائر
+  <br>واتساب المحل: 0696809023
+  <br>© <span id="year"></span> MotoDz
+</footer>
 
-    <!-- زر إرسال الطلب عبر واتساب -->
-    <button id="whatsapp-btn" class="btn btn-whatsapp" onclick="sendWhatsAppOrder()">📲 إرسال الطلب عبر الواتساب للمحل</button>
-</div>
+<a class="whatsapp-float" href="https://wa.me/213696809023"
+   target="_blank" rel="noopener">واتساب المحل</a>
+<div id="toast" class="toast" role="status"></div>
 
 <script>
-    let cartCount = 0;
-    let cartTotal = 0;
-    let orderedItems = [];
+/*
+  لتغيير المنتجات: عدّل القائمة أدناه.
+  لإضافة صورة حقيقية، ارفع الصورة إلى مجلد images
+  ثم اكتب مسارها في الخاصية image، مثل:
+  image: "images/moteur-c150.jpg"
+*/
 
-    function addToCart(productName, price) {
-        cartCount++;
-        cartTotal += price;
-        orderedItems.push(productName + " (" + price + " دج)");
-        
-        document.getElementById('cart-count').innerText = cartCount;
-        document.getElementById('cart-total').innerText = cartTotal;
-        
-        // إظهار زر الواتساب بمجرد اختيار أول قطعة
-        document.getElementById('whatsapp-btn').style.display = "block";
-        
-        alert("تمت إضافة " + productName + " إلى السلة بنجاح!");
+const WHATSAPP_NUMBER = "213696809023";
+
+const products = [
+  {
+    id:1,
+    name:"محرك C150 كامل",
+    category:"المحركات",
+    price:28000,
+    icon:"⚙️",
+    image:"",
+    description:"تحقق من توافق المحرك مع نوع دراجتك."
+  },
+  {
+    id:2,
+    name:"طقم إطارات أمامية وخلفية",
+    category:"العجلات",
+    price:6500,
+    icon:"🛞",
+    image:"",
+    description:"تأكد من المقاس قبل الطلب."
+  },
+  {
+    id:3,
+    name:"زيت محرك للدراجات",
+    category:"الزيوت",
+    price:1200,
+    icon:"🛢️",
+    image:"",
+    description:"اختر النوع المناسب لمحركك."
+  },
+  {
+    id:4,
+    name:"شمعة إشعال",
+    category:"الكهرباء",
+    price:450,
+    icon:"🔩",
+    image:"",
+    description:"تحقق من نوع الشمعة المناسب."
+  },
+  {
+    id:5,
+    name:"سلسلة نقل الحركة",
+    category:"أخرى",
+    price:1800,
+    icon:"⛓️",
+    image:"",
+    description:"تحقق من المقاس والتوافق."
+  },
+  {
+    id:6,
+    name:"مصباح أمامي",
+    category:"الكهرباء",
+    price:900,
+    icon:"💡",
+    image:"",
+    description:"تأكد من توافق المصباح مع الدراجة."
+  },
+  {
+    id:7,
+    name:"بطانات الفرامل",
+    category:"أخرى",
+    price:700,
+    icon:"🧰",
+    image:"",
+    description:"اختر القطعة المناسبة لموديل دراجتك."
+  },
+  {
+    id:8,
+    name:"أنبوب داخلي للعجلة",
+    category:"العجلات",
+    price:800,
+    icon:"⭕",
+    image:"",
+    description:"تأكد من مقاس العجلة."
+  }
+];
+
+let cart = [];
+let activeCategory = "الكل";
+
+function formatMoney(value) {
+  return new Intl.NumberFormat("fr-DZ").format(value) + " دج";
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => {
+    toast.style.display = "none";
+  }, 2200);
+}
+
+function renderProducts() {
+  const term = document.getElementById("search").value.trim().toLowerCase();
+  const sortMode = document.getElementById("sort").value;
+
+  let filtered = products.filter(p => {
+    const categoryMatch =
+      activeCategory === "الكل" || p.category === activeCategory;
+    const searchMatch =
+      (p.name + " " + p.category + " " + p.description)
+        .toLowerCase().includes(term);
+    return categoryMatch && searchMatch;
+  });
+
+  if (sortMode === "low") filtered.sort((a,b) => a.price - b.price);
+  if (sortMode === "high") filtered.sort((a,b) => b.price - a.price);
+  if (sortMode === "name") filtered.sort((a,b) => a.name.localeCompare(b.name,"ar"));
+
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+
+  filtered.forEach(p => {
+    const card = document.createElement("article");
+    card.className = "product";
+
+    const visual = document.createElement("div");
+    visual.className = "product-image-wrap";
+
+    if (p.image) {
+      const img = document.createElement("img");
+      img.className = "product-image";
+      img.src = p.image;
+      img.alt = p.name;
+      img.loading = "lazy";
+      img.onerror = () => {
+        visual.innerHTML = "";
+        const fallback = document.createElement("div");
+        fallback.className = "product-placeholder";
+        fallback.textContent = p.icon;
+        visual.appendChild(fallback);
+      };
+      visual.appendChild(img);
+    } else {
+      const fallback = document.createElement("div");
+      fallback.className = "product-placeholder";
+      fallback.textContent = p.icon;
+      visual.appendChild(fallback);
     }
 
-    function sendWhatsAppOrder() {
-        let phone = "213600000000"; // استبدل هذا الرقم برقم هاتفك الحقيقي (بدون علامة + أو أصفار زائدة، مثلاً: 213669XXXXXX)
-        let message = "السلام عليكم، أود طلب قطع الغيار التالية من متجر MotoDz:\n\n" + 
-                      orderedItems.join("\n") + 
-                      "\n\nالمجموع الإجمالي التقريبي: " + cartTotal + " دج\nيرجى تأكيد التوفر والموعد.";
-        
-        let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
-        window.open(url, '_blank');
-    }
+    const content = document.createElement("div");
+    content.className = "product-content";
+
+    const category = document.createElement("div");
+    category.className = "product-category";
+    category.textContent = p.category;
+
+    const name = document.createElement("h3");
+    name.textContent = p.name;
+
+    const price = document.createElement("div");
+    price.className = "price";
+    price.textContent = formatMoney(p.price);
+
+    const description = document.createElement("p");
+    description.className = "product-description";
+    description.textContent = p.description;
+
+    const add = document.createElement("button");
+    add.className = "btn add-btn";
+    add.textContent = "إضافة إلى السلة +";
+    add.addEventListener("click", () => addToCart(p.id));
+
+    content.append(category, name, price, description, add);
+    card.append(visual, content);
+    container.appendChild(card);
+  });
+
+  document.getElementById("no-results").hidden = filtered.length !== 0;
+}
+
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  if (!product) return;
+
+  const existing = cart.find(p => p.id === id);
+  if (existing) existing.quantity++;
+  else cart.push({...product, quantity:1});
+
+  renderCart();
+  showToast("تمت إضافة " + product.name + " إلى السلة");
+}
+
+function changeQuantity(id, amount) {
+  const item = cart.find(p => p.id === id);
+  if (!item) return;
+
+  item.quantity += amount;
+  if (item.quantity <= 0) cart = cart.filter(p => p.id !== id);
+  renderCart();
+}
+
+function removeItem(id) {
+  cart = cart.filter(p => p.id !== id);
+  renderCart();
+  showToast("تم حذف القطعة من السلة");
+}
+
+function clearCart() {
+  if (!cart.length) {
+    showToast("السلة فارغة بالفعل");
+    return;
+  }
+  cart = [];
+  renderCart();
+  showToast("تم إفراغ السلة");
+}
+
+function renderCart() {
+  const container = document.getElementById("cart-items");
+  const count = cart.reduce((sum,p) => sum + p.quantity, 0);
+  const total = cart.reduce((sum,p) => sum + p.price * p.quantity, 0);
+
+  document.getElementById("header-count").textContent = count;
+  document.getElementById("cart-total").textContent = formatMoney(total);
+  document.getElementById("order-btn").disabled = cart.length === 0;
+  container.innerHTML = "";
+
+  if (!cart.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "سلتك فارغة. أضف القطع التي تحتاجها.";
+    container.appendChild(empty);
+    return;
+  }
+
+  cart.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "cart-item";
+
+    const details = document.createElement("div");
+    const name = document.createElement("div");
+    name.className = "cart-name";
+    name.textContent = item.name;
+
+    const unit = document.createElement("div");
+    unit.className = "cart-unit";
+    unit.textContent = formatMoney(item.price) + " للقطعة";
+
+    const quantity = document.createElement("div");
+    quantity.className = "quantity";
+
+    const minus = document.createElement("button");
+    minus.textContent = "−";
+    minus.setAttribute("aria-label","إنقاص الكمية");
+    minus.onclick = () => changeQuantity(item.id,-1);
+
+    const number = document.createElement("strong");
+    number.textContent = item.quantity;
+
+    const plus = document.createElement("button");
+    plus.textContent = "+";
+    plus.setAttribute("aria-label","زيادة الكمية");
+    plus.onclick = () => changeQuantity(item.id,1);
+
+    quantity.append(minus,number,plus);
+
+    const remove = document.createElement("button");
+    remove.className = "text-btn";
+    remove.textContent = "حذف القطعة";
+    remove.onclick = () => removeItem(item.id);
+
+    details.append(name,unit,quantity,remove);
+
+    const subtotal = document.createElement("strong");
+    subtotal.textContent = formatMoney(item.price * item.quantity);
+
+    row.append(details,subtotal);
+    container.appendChild(row);
+  });
+}
+
+function sendOrder() {
+  if (!cart.length) {
+    showToast("أضف منتجًا إلى السلة أولًا");
+    return;
+  }
+
+  const total = cart.reduce((sum,p) => sum + p.price * p.quantity,0);
+
+  const lines = cart.map(p =>
+    "- " + p.name +
+    " | الكمية: " + p.quantity +
+    " | المجموع: " + formatMoney(p.price * p.quantity)
+  );
+
+  const message = [
+    "السلام عليكم، أريد طلب قطع غيار من متجر MotoDz.",
+    "",
+    ...lines,
+    "",
+    "المجموع التقريبي: " + formatMoney(total),
+    "",
+    "الاسم:",
+    "نوع الدراجة وموديلها:",
+    "الولاية والبلدية:",
+    "يرجى تأكيد الأسعار والتوفر والتوافق قبل تأكيد الطلب."
+  ].join("\n");
+
+  const url = "https://wa.me/" + WHATSAPP_NUMBER +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url,"_blank");
+}
+
+function goToCart() {
+  document.getElementById("cart").scrollIntoView({
+    behavior:"smooth", block:"start"
+  });
+}
+
+function continueShopping() {
+  document.getElementById("products").scrollIntoView({
+    behavior:"smooth", block:"start"
+  });
+}
+
+document.getElementById("search").addEventListener("input",renderProducts);
+document.getElementById("sort").addEventListener("change",renderProducts);
+
+document.getElementById("categories").addEventListener("click",event => {
+  const button = event.target.closest("[data-category]");
+  if (!button) return;
+
+  activeCategory = button.dataset.category;
+  document.querySelectorAll(".category-btn").forEach(btn => {
+    btn.classList.toggle("active",btn === button);
+  });
+  renderProducts();
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+renderProducts();
+renderCart();
 </script>
-
 </body>
 </html>
+ 
