@@ -3,53 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قطع غيار MotoDz | الدراجات النارية</title>
+    <title>MotoDz | قطع غيار الدراجات النارية - فيض البطمة</title>
     <style>
         body { font-family: Tahoma, sans-serif; background-color: #f4f6f8; margin: 0; padding: 0; color: #333; }
         header { background-color: #111; color: #fff; padding: 15px; text-align: center; }
         .container { padding: 15px; max-width: 600px; margin: auto; }
         .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px; }
-        input, select { width: 100%; padding: 10px; margin: 5px 0 15px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        .btn { background-color: #198754; color: white; padding: 12px; border: none; width: 100%; border-radius: 5px; font-size: 16px; cursor: pointer; }
+        .product-grid { display: grid; gap: 15px; margin-bottom: 15px; }
+        .product-card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid #ddd; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-title { font-size: 16px; font-weight: bold; margin-bottom: 5px; }
+        .product-price { color: #0d6efd; font-weight: bold; margin-bottom: 10px; }
+        .btn { background-color: #198754; color: white; padding: 10px; border: none; width: 100%; border-radius: 5px; font-size: 15px; cursor: pointer; font-weight: bold; }
+        .btn-cart { background-color: #0d6efd; }
+        .btn-whatsapp { background-color: #25d366; margin-top: 10px; display: none; }
         .location { color: #d9534f; font-weight: bold; font-size: 14px; }
+        #cart-summary { background: #eef9ff; border: 1px solid #bce8f1; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <header>
     <h2>MotoDz</h2>
-    <p>قطع غيار الدراجات النارية</p>
+    <p>متجر قطع غيار الدراجات النارية - فيض البطمة، الجلفة</p>
 </header>
 
 <div class="container">
     <div class="card">
-        <h3>قطعتك تبدأ من هنا 🏍️</h3>
-        <p>تصفح المنتجات وأضف ما تحتاجه إلى السلة. تأكد من توافق القطعة مع دراجتك قبل تأكيد الطلب.</p>
+        <h3>مرحباً بك في متجرنا 🏍️</h3>
+        <p>اختر قطع الغيار المطلوبة، أضفها للسلة، وأرسل طلبك مباشرة عبر الواتساب لتأكيد التوفر في المحل.</p>
         <p class="location">📍 فيض البطمة - الجلفة، الجزائر</p>
     </div>
-<div class="card" style="border: 1px solid #ddd;">
-    <h4>محرك C150 / أو اسم القطعة</h4>
-    <p>السعر: <strong>25,000 دج</strong></p>
-    <p style="font-size: 13px; color: #555;">متوفر في المحل - ضمان الجودة والتوافق</p>
-    <button class="btn" style="padding: 8px; font-size: 14px; background-color: #0d6efd;">إضافة للسلة</button>
-</div>
 
-    <input type="text" placeholder="ابحث عن قطعة أو موديل...">
-    
-    <select>
-        <option>كل التصنيفات</option>
-    </select>
-
-    <select>
-        <option>الترتيب الافتراضي</option>
-    </select>
-
-    <div style="text-align: center; font-size: 13px; color: #666; margin-bottom: 20px;">
-        الأسعار والتوفر والتوافق تؤكد مع المحل قبل الدفع. لا يتم الدفع داخل الموقع.
+    <div id="cart-summary">
+        🛒 السلة: <span id="cart-count">0</span> قطع | المجموع الكلي: <span id="cart-total">0</span> دج
     </div>
 
-    <button class="btn">عرض السلة والطلب (0 دج)</button>
+    <h3>قائمة المنتجات والقطع المتوفرة:</h3>
+    
+    <div class="product-grid">
+        <!-- المنتج الأول -->
+        <div class="product-card">
+            <div>
+                <div class="product-title">محرك C150 كامل</div>
+                <div class="product-price">28,000 دج</div>
+                <p style="font-size: 13px; color: #555;">متوفر في المحل - ضمان الجودة والتوافق.</p>
+            </div>
+            <button class="btn btn-cart" onclick="addToCart('محرك C150', 28000)">إضافة للسلة</button>
+        </div>
+
+        <!-- المنتج الثاني -->
+        <div class="product-card">
+            <div>
+                <div class="product-title">طقم إطارات (عجلات) أمامية وخلفية</div>
+                <div class="product-price">6,500 دج</div>
+                <p style="font-size: 13px; color: #555;">متين ومقاوم لجميع الطرق.</p>
+            </div>
+            <button class="btn btn-cart" onclick="addToCart('طقم إطارات دراجة', 6500)">إضافة للسلة</button>
+        </div>
+
+        <!-- المنتج الثالث -->
+        <div class="product-card">
+            <div>
+                <div class="product-title">زيت محرك عالي الأداء</div>
+                <div class="product-price">1,200 دج</div>
+                <p style="font-size: 13px; color: #555;">حماية قصوى وعمر أطول للمحرك.</p>
+            </div>
+            <button class="btn btn-cart" onclick="addToCart('زيت محرك عالي الأداء', 1200)">إضافة للسلة</button>
+        </div>
+    </div>
+
+    <div style="text-align: center; font-size: 13px; color: #666; margin-bottom: 15px;">
+        الأسعار والتوفر تؤكد مع المحل قبل الدفع النهائي.
+    </div>
+
+    <!-- زر إرسال الطلب عبر واتساب -->
+    <button id="whatsapp-btn" class="btn btn-whatsapp" onclick="sendWhatsAppOrder()">📲 إرسال الطلب عبر الواتساب للمحل</button>
 </div>
+
+<script>
+    let cartCount = 0;
+    let cartTotal = 0;
+    let orderedItems = [];
+
+    function addToCart(productName, price) {
+        cartCount++;
+        cartTotal += price;
+        orderedItems.push(productName + " (" + price + " دج)");
+        
+        document.getElementById('cart-count').innerText = cartCount;
+        document.getElementById('cart-total').innerText = cartTotal;
+        
+        // إظهار زر الواتساب بمجرد اختيار أول قطعة
+        document.getElementById('whatsapp-btn').style.display = "block";
+        
+        alert("تمت إضافة " + productName + " إلى السلة بنجاح!");
+    }
+
+    function sendWhatsAppOrder() {
+        let phone = "213600000000"; // استبدل هذا الرقم برقم هاتفك الحقيقي (بدون علامة + أو أصفار زائدة، مثلاً: 213669XXXXXX)
+        let message = "السلام عليكم، أود طلب قطع الغيار التالية من متجر MotoDz:\n\n" + 
+                      orderedItems.join("\n") + 
+                      "\n\nالمجموع الإجمالي التقريبي: " + cartTotal + " دج\nيرجى تأكيد التوفر والموعد.";
+        
+        let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+        window.open(url, '_blank');
+    }
+</script>
 
 </body>
 </html>
